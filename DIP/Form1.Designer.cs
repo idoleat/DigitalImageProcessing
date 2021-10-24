@@ -31,25 +31,26 @@ namespace DIP
         {
             this.btn_OpenImage = new System.Windows.Forms.Button();
             this.btn_SaveImage = new System.Windows.Forms.Button();
-            this.SourceImage = new System.Windows.Forms.PictureBox();
+            this.SourceImageBox = new System.Windows.Forms.PictureBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.ProcessedImage = new System.Windows.Forms.PictureBox();
+            this.ProcessedImageBox = new System.Windows.Forms.PictureBox();
             this.RGB = new System.Windows.Forms.Label();
             this.RGB_r = new System.Windows.Forms.Button();
             this.RGB_g = new System.Windows.Forms.Button();
             this.RGB_b = new System.Windows.Forms.Button();
             this.RGB_grey = new System.Windows.Forms.Button();
             this.test = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.SourceImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ProcessedImage)).BeginInit();
+            this.btn_undo = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.SourceImageBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProcessedImageBox)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_OpenImage
             // 
             this.btn_OpenImage.Location = new System.Drawing.Point(12, 12);
             this.btn_OpenImage.Name = "btn_OpenImage";
-            this.btn_OpenImage.Size = new System.Drawing.Size(102, 35);
+            this.btn_OpenImage.Size = new System.Drawing.Size(74, 35);
             this.btn_OpenImage.TabIndex = 0;
             this.btn_OpenImage.Text = "Open Image";
             this.btn_OpenImage.UseVisualStyleBackColor = true;
@@ -57,36 +58,36 @@ namespace DIP
             // 
             // btn_SaveImage
             // 
-            this.btn_SaveImage.Location = new System.Drawing.Point(132, 12);
+            this.btn_SaveImage.Location = new System.Drawing.Point(92, 12);
             this.btn_SaveImage.Name = "btn_SaveImage";
-            this.btn_SaveImage.Size = new System.Drawing.Size(97, 32);
+            this.btn_SaveImage.Size = new System.Drawing.Size(72, 35);
             this.btn_SaveImage.TabIndex = 1;
             this.btn_SaveImage.Text = "Save Image";
             this.btn_SaveImage.UseVisualStyleBackColor = true;
             this.btn_SaveImage.Click += new System.EventHandler(this.onClick_SaveImage);
             // 
-            // SourceImage
+            // SourceImageBox
             // 
-            this.SourceImage.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.SourceImage.Enabled = false;
-            this.SourceImage.Location = new System.Drawing.Point(253, 12);
-            this.SourceImage.Name = "SourceImage";
-            this.SourceImage.Size = new System.Drawing.Size(378, 244);
-            this.SourceImage.TabIndex = 2;
-            this.SourceImage.TabStop = false;
+            this.SourceImageBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.SourceImageBox.Enabled = false;
+            this.SourceImageBox.Location = new System.Drawing.Point(253, 12);
+            this.SourceImageBox.Name = "SourceImageBox";
+            this.SourceImageBox.Size = new System.Drawing.Size(320, 240);
+            this.SourceImageBox.TabIndex = 2;
+            this.SourceImageBox.TabStop = false;
             // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
-            // ProcessedImage
+            // ProcessedImageBox
             // 
-            this.ProcessedImage.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ProcessedImage.Location = new System.Drawing.Point(253, 274);
-            this.ProcessedImage.Name = "ProcessedImage";
-            this.ProcessedImage.Size = new System.Drawing.Size(378, 244);
-            this.ProcessedImage.TabIndex = 3;
-            this.ProcessedImage.TabStop = false;
+            this.ProcessedImageBox.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ProcessedImageBox.Location = new System.Drawing.Point(253, 274);
+            this.ProcessedImageBox.Name = "ProcessedImageBox";
+            this.ProcessedImageBox.Size = new System.Drawing.Size(320, 240);
+            this.ProcessedImageBox.TabIndex = 3;
+            this.ProcessedImageBox.TabStop = false;
             // 
             // RGB
             // 
@@ -144,26 +145,37 @@ namespace DIP
             this.test.UseVisualStyleBackColor = true;
             this.test.Click += new System.EventHandler(this.test_Click);
             // 
+            // btn_undo
+            // 
+            this.btn_undo.Location = new System.Drawing.Point(198, 12);
+            this.btn_undo.Name = "btn_undo";
+            this.btn_undo.Size = new System.Drawing.Size(30, 35);
+            this.btn_undo.TabIndex = 10;
+            this.btn_undo.Text = "undo";
+            this.btn_undo.UseVisualStyleBackColor = true;
+            this.btn_undo.Click += new System.EventHandler(this.btn_undo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 539);
+            this.Controls.Add(this.btn_undo);
             this.Controls.Add(this.test);
             this.Controls.Add(this.RGB_grey);
             this.Controls.Add(this.RGB_b);
             this.Controls.Add(this.RGB_g);
             this.Controls.Add(this.RGB_r);
             this.Controls.Add(this.RGB);
-            this.Controls.Add(this.ProcessedImage);
-            this.Controls.Add(this.SourceImage);
+            this.Controls.Add(this.ProcessedImageBox);
+            this.Controls.Add(this.SourceImageBox);
             this.Controls.Add(this.btn_SaveImage);
             this.Controls.Add(this.btn_OpenImage);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.SourceImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ProcessedImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SourceImageBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProcessedImageBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,16 +185,17 @@ namespace DIP
 
         private System.Windows.Forms.Button btn_OpenImage;
         private System.Windows.Forms.Button btn_SaveImage;
-        private System.Windows.Forms.PictureBox SourceImage;
+        private System.Windows.Forms.PictureBox SourceImageBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
-        private System.Windows.Forms.PictureBox ProcessedImage;
+        private System.Windows.Forms.PictureBox ProcessedImageBox;
         private System.Windows.Forms.Label RGB;
         private System.Windows.Forms.Button RGB_r;
         private System.Windows.Forms.Button RGB_g;
         private System.Windows.Forms.Button RGB_b;
         private System.Windows.Forms.Button RGB_grey;
         private System.Windows.Forms.Button test;
+        private System.Windows.Forms.Button btn_undo;
     }
 }
 
