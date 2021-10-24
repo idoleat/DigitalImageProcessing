@@ -16,5 +16,21 @@ namespace DIP
         {
             InitializeComponent();
         }
+
+        private void onClick_OpenImage(object sender, EventArgs e)
+        {
+            openFileDialog.Filter = "All Files|*.*|Bitmap File|*.bmp|Jpeg Files|*.jpg";
+            if (openFileDialog.ShowDialog() == DialogResult.OK) pictureBox1.Image = new Bitmap(openFileDialog.FileName);
+        }
+
+        private void onClick_SaveImage(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
