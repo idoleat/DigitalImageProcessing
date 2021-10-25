@@ -73,7 +73,7 @@ namespace DIP
                 rgbValues[counter] = LastOne[counter];
 
 
-            // Set every third value to 255. A 24bpp bitmap will look red.  
+            // Cycling RGB colors
             count += 1;
             if (count % 3 == 0)
             {
@@ -103,25 +103,9 @@ namespace DIP
                     rgbValues[counter] = 255;
             }
 
-
-            // Copy the RGB values back to the bitmap
-
             history.Add(rgbValues);
             ShowHistoryLast();
         }
-
-        /*private BitmapData CopyLastBitmapData()
-        {
-            BitmapData bmpData = new BitmapData();
-            bmpData.Scan0 = history.Last().Scan0;
-            bmpData.Height = history.Last().Height;
-            bmpData.Width = history.Last().Width;
-            bmpData.PixelFormat = history.Last().PixelFormat;
-            //bmpData.Reserved = history.Last().Reserved;
-            bmpData.Stride = history.Last().Stride;
-
-            return bmpData;
-        }*/
 
         private void ShowHistoryLast()
         {
