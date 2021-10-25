@@ -17,7 +17,9 @@ namespace DIP
         public Bitmap OpenedBitmap;
         public Bitmap ProcessedBitmap;
         public List<byte[]> history = new List<byte[]>();
-        int count = 0;
+
+        // for TestEffect
+        private int count = 0;
 
         public Form1()
         {
@@ -52,59 +54,6 @@ namespace DIP
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void RGB_r_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void test_Click(object sender, EventArgs e)
-        {
-            byte[] LastOne = history.Last();
-            //BitmapData bmpData = new BitmapData();
-            //bmpData = history.Last();
-
-            // Declare an array to hold the bytes of the bitmap.
-            byte[] rgbValues = new byte[LastOne.Length];
-
-            // Copy the RGB values into the array.
-            for (int counter = 0; counter < rgbValues.Length; counter += 1)
-                rgbValues[counter] = LastOne[counter];
-
-
-            // Cycling RGB colors
-            count += 1;
-            if (count % 3 == 0)
-            {
-                for (int counter = 0; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 255;
-                for (int counter = 1; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
-                for (int counter = 2; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
-            }
-            else if(count % 3 == 1)
-            {
-                for (int counter = 0; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
-                for (int counter = 1; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 255;
-                for (int counter = 2; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
-            }
-            else
-            {
-                for (int counter = 0; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
-                for (int counter = 1; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
-                for (int counter = 2; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 255;
-            }
-
-            history.Add(rgbValues);
-            ShowHistoryLast();
         }
 
         private void ShowHistoryLast()

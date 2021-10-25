@@ -116,6 +116,7 @@ namespace DIP
             this.RGB_g.TabIndex = 6;
             this.RGB_g.Text = "G";
             this.RGB_g.UseVisualStyleBackColor = true;
+            this.RGB_g.Click += new System.EventHandler(this.RGB_g_Click);
             // 
             // RGB_b
             // 
@@ -125,6 +126,7 @@ namespace DIP
             this.RGB_b.TabIndex = 7;
             this.RGB_b.Text = "B";
             this.RGB_b.UseVisualStyleBackColor = true;
+            this.RGB_b.Click += new System.EventHandler(this.RGB_b_Click);
             // 
             // RGB_grey
             // 
@@ -134,6 +136,7 @@ namespace DIP
             this.RGB_grey.TabIndex = 8;
             this.RGB_grey.Text = "Grey";
             this.RGB_grey.UseVisualStyleBackColor = true;
+            this.RGB_grey.Click += new System.EventHandler(this.RGB_grey_Click);
             // 
             // test
             // 
