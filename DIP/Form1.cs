@@ -16,7 +16,7 @@ namespace DIP
     {
         public Bitmap OpenedBitmap;
         public Bitmap ProcessedBitmap;
-        public List<BitmapData> history = new List<BitmapData>();
+        public List<byte[]> history = new List<byte[]>();
         int count = 0;
 
         public Form1()
@@ -31,16 +31,11 @@ namespace DIP
             {
                 OpenedBitmap = new Bitmap(openFileDialog.FileName);
                 ProcessedBitmap = new Bitmap(openFileDialog.FileName);
-                BitmapData bmpd = ProcessedBitmap.LockBits(
-                        new Rectangle(0, 0, ProcessedBitmap.Width,
-                        ProcessedBitmap.Height),
-                        ImageLockMode.ReadWrite,
-                        ProcessedBitmap.PixelFormat
-                );
-                history.Add(bmpd);
-                ProcessedBitmap.UnlockBits(bmpd);
                 SourceImageBox.Image = OpenedBitmap;
                 ProcessedImageBox.Image = ProcessedBitmap;
+
+                // Add the original image as first history
+                history.Add( GetBitmapDataBytes(ProcessedBitmap) );
             }
         }
 
@@ -66,16 +61,17 @@ namespace DIP
 
         private void test_Click(object sender, EventArgs e)
         {
-            BitmapData bmpData = CopyLastBitmapData();
+            byte[] LastOne = history.Last();
             //BitmapData bmpData = new BitmapData();
             //bmpData = history.Last();
 
             // Declare an array to hold the bytes of the bitmap.
-            int bytes = Math.Abs(bmpData.Stride) * OpenedBitmap.Height;
-            byte[] rgbValues = new byte[bytes];
+            byte[] rgbValues = new byte[LastOne.Length];
 
             // Copy the RGB values into the array.
-            Marshal.Copy(bmpData.Scan0, rgbValues, 0, bytes);
+            for (int counter = 0; counter < rgbValues.Length; counter += 1)
+                rgbValues[counter] = LastOne[counter];
+
 
             // Set every third value to 255. A 24bpp bitmap will look red.  
             count += 1;
@@ -106,40 +102,30 @@ namespace DIP
                 for (int counter = 2; counter < rgbValues.Length; counter += 3)
                     rgbValues[counter] = 255;
             }
-            
+
 
             // Copy the RGB values back to the bitmap
-            Marshal.Copy(rgbValues, 0, bmpData.Scan0, bytes);
 
-            history.Add(bmpData);
+            history.Add(rgbValues);
             ShowHistoryLast();
         }
 
-        private BitmapData CopyLastBitmapData()
+        /*private BitmapData CopyLastBitmapData()
         {
             BitmapData bmpData = new BitmapData();
             bmpData.Scan0 = history.Last().Scan0;
             bmpData.Height = history.Last().Height;
             bmpData.Width = history.Last().Width;
             bmpData.PixelFormat = history.Last().PixelFormat;
-            bmpData.Reserved = history.Last().Reserved;
+            //bmpData.Reserved = history.Last().Reserved;
             bmpData.Stride = history.Last().Stride;
 
             return bmpData;
-        }
+        }*/
 
         private void ShowHistoryLast()
         {
-            BitmapData bmpd;
-            ProcessedBitmap.LockBits(
-                        new Rectangle(0, 0, ProcessedBitmap.Width,
-                        ProcessedBitmap.Height),
-                        ImageLockMode.ReadWrite,
-                        ProcessedBitmap.PixelFormat
-            );
-            bmpd = CopyLastBitmapData();
-            //bmpd = history.Last();
-            ProcessedBitmap.UnlockBits(bmpd);
+            SetBitmapDataBytes(ProcessedBitmap, history.Last());
 
             // Draw the modified image.
             ProcessedImageBox.Image = ProcessedBitmap;
@@ -149,9 +135,37 @@ namespace DIP
         private void btn_undo_Click(object sender, EventArgs e)
         {
             if (history.Count <= 1) return;
+            //Marshal.FreeHGlobal(history.Last().Scan0);
             history.RemoveAt(history.Count - 1);
-            Console.WriteLine(history.Count);
             ShowHistoryLast();
+        }
+
+        public byte[] GetBitmapDataBytes(Bitmap bmp)
+        {
+            BitmapData bmpData = bmp.LockBits(
+                new Rectangle(0, 0, bmp.Width, bmp.Height),
+                ImageLockMode.ReadOnly, ProcessedBitmap.PixelFormat
+            );
+
+            int bytes = bmpData.Stride * bmpData.Height;
+            byte[] buffer = new byte[bytes];
+            Marshal.Copy(bmpData.Scan0, buffer, 0, bytes);
+
+            bmp.UnlockBits(bmpData);
+
+            return buffer;
+        }
+
+        public void SetBitmapDataBytes(Bitmap bmp, byte[] bytes)
+        {
+            BitmapData bmpData = bmp.LockBits(
+                new Rectangle(0, 0, bmp.Width, bmp.Height),
+                ImageLockMode.WriteOnly, ProcessedBitmap.PixelFormat
+                );
+
+            Marshal.Copy(bytes, 0, bmpData.Scan0, bytes.Length);
+
+            bmp.UnlockBits(bmpData);
         }
     }
 }
