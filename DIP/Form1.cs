@@ -18,6 +18,18 @@ namespace DIP
         public Bitmap ProcessedBitmap;
         public List<byte[]> history = new List<byte[]>();
 
+        public enum Filter
+        {
+            Median,
+            Mean,
+            HistonEqual,
+            Thres,
+            HSobel,
+            VSobel,
+            ConnComp,
+            Regist
+        }
+
         // for TestEffect
         private int count = 0;
 
@@ -99,6 +111,54 @@ namespace DIP
             Marshal.Copy(bytes, 0, bmpData.Scan0, bytes.Length);
 
             bmp.UnlockBits(bmpData);
+        }
+
+        public void GeneralFilter(Filter fileterType)
+        {
+            // prevent applying filters when there's no image
+            if (history.Count == 0) return;
+
+            byte[] LastOne = history.Last();
+            byte[] rgbValues = new byte[LastOne.Length];
+            for (int counter = 0; counter < rgbValues.Length; counter += 1)
+                rgbValues[counter] = LastOne[counter];
+
+            switch (fileterType)
+            {
+                case Filter.Median:
+                    MedianFilter(ref rgbValues);
+                    break;
+
+                case Filter.Mean:
+                    MeanFilter(ref rgbValues);
+                    break;
+
+                case Filter.HistonEqual:
+                    HistongramEqualization(ref rgbValues);
+                    break;
+
+                case Filter.Thres:
+                    break;
+
+                case Filter.HSobel:
+                    break;
+
+                case Filter.VSobel:
+                    break;
+
+                case Filter.Regist:
+                    break;
+
+                case Filter.ConnComp:
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid Filter choice");
+                    break;
+            }
+
+            history.Add(rgbValues);
+            ShowHistoryLast();
         }
     }
 }
