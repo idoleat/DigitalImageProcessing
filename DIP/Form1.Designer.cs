@@ -292,7 +292,6 @@ namespace DIP
             this.Controls.Add(this.btn_OpenImage);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SourceImageBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProcessedImageBox)).EndInit();
             this.groupBox1.ResumeLayout(false);
