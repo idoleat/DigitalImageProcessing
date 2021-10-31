@@ -15,10 +15,41 @@ namespace DIP
 
         private void MedianFilter(ref byte[] rgbValue)
         {
-            
-            for(int i=0; i<rgbValue.Length; i += 3)
-            {
 
+            int width = OpenedBitmap.Width * 3;
+            byte[] original = new byte[rgbValue.Length];
+            for (int counter = 0; counter < original.Length; counter += 1)
+                original[counter] = rgbValue[counter];
+
+            List<byte> NxN = new List<byte>();
+            for (int i = 1; i <= OpenedBitmap.Height - 2; i++)
+            {
+                for (int j = 3; j < width - 3; j += 3)
+                {
+                    byte[] colors = new byte[256];
+
+                    colors[original[(i - 1) * width + j - 3]] = original[(i - 1) * width + j - 3];
+                    colors[original[(i - 1) * width + j]] = original[(i - 1) * width + j - 3];
+                    colors[original[(i - 1) * width + j + 3]] = original[(i - 1) * width + j - 3];
+                    colors[original[i * width + j - 3]] = original[(i - 1) * width + j - 3];
+                    colors[original[i * width + j]] = original[(i - 1) * width + j - 3];
+                    colors[original[i * width + j + 3]] = original[(i - 1) * width + j - 3];
+                    colors[original[(i + 1) * width + j - 3]] = original[(i - 1) * width + j - 3];
+                    colors[original[(i + 1) * width + j]] = original[(i - 1) * width + j - 3];
+                    colors[original[(i + 1) * width + j + 3]] = original[(i - 1) * width + j - 3];
+
+                    int count = 0;
+                    for(int k=0; k<255; k++)
+                    {
+                        if (colors[k] != 0) count += 1;
+                        if(count == 4)
+                        {
+                            rgbValue[i * width + j] = colors[k];
+                            rgbValue[i * width + j + 1] = colors[k];
+                            rgbValue[i * width + j + 2] = colors[k];
+                        }
+                    }
+                }
             }
         }
 
@@ -29,9 +60,30 @@ namespace DIP
 
         private void MeanFilter(ref byte[] rgbValue)
         {
-            for (int i = 0; i < rgbValue.Length; i += 3)
+            int width = OpenedBitmap.Width *3;
+            byte[] original = new byte[rgbValue.Length];
+            for (int counter = 0; counter < original.Length; counter += 1)
+                original[counter] = rgbValue[counter];
+            for (int i=1 ; i <= OpenedBitmap.Height-2; i++)
             {
+                for(int j=3; j < width - 3; j += 3)
+                {
+                    int mean =
+                        original[(i - 1) * width + j-3] +
+                        original[(i - 1) * width + j] +
+                        original[(i - 1) * width + j+3] +
+                        original[i * width + j-3] +
+                        original[i * width + j] +
+                        original[i * width + j+3] +
+                        original[(i + 1) * width + j-3] +
+                        original[(i + 1) * width + j] +
+                        original[(i + 1) * width + j+3];
 
+                    mean /= 9;
+                    rgbValue[i * width + j] = (byte)mean;
+                    rgbValue[i * width + j+1] = (byte)mean;
+                    rgbValue[i * width + j+2] = (byte)mean;
+                }
             }
         }
     }

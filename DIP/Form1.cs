@@ -67,7 +67,8 @@ namespace DIP
         {
             SetBitmapDataBytes(ProcessedBitmap, history.Last());
 
-            // Draw the modified image.
+            // Draw the modified image immediately.
+            // Otherwise the image will be updated in a indefinated period of time, eventhough thr image reference is updated already.
             ProcessedImageBox.Image = ProcessedBitmap;
             // Actually before applying filters, image should be freed. But it's C#...let GC do it for you
         }
@@ -75,7 +76,6 @@ namespace DIP
         private void btn_undo_Click(object sender, EventArgs e)
         {
             if (history.Count <= 1) return;
-            //Marshal.FreeHGlobal(history.Last().Scan0);
             history.RemoveAt(history.Count - 1);
             ShowHistoryLast();
         }
