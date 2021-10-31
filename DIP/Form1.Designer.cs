@@ -29,6 +29,12 @@ namespace DIP
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btn_OpenImage = new System.Windows.Forms.Button();
             this.btn_SaveImage = new System.Windows.Forms.Button();
             this.SourceImageBox = new System.Windows.Forms.PictureBox();
@@ -48,16 +54,20 @@ namespace DIP
             this.HistonEqual = new System.Windows.Forms.GroupBox();
             this.btn_HistonEqual = new System.Windows.Forms.Button();
             this.Threshold = new System.Windows.Forms.GroupBox();
+            this.ThresVal = new System.Windows.Forms.NumericUpDown();
             this.btn_Threshold = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.histon1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.histon2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.SourceImageBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProcessedImageBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.HistonEqual.SuspendLayout();
             this.Threshold.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ThresVal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.histon1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.histon2)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_OpenImage
@@ -145,7 +155,7 @@ namespace DIP
             // 
             // test
             // 
-            this.test.Location = new System.Drawing.Point(696, 20);
+            this.test.Location = new System.Drawing.Point(10, 501);
             this.test.Name = "test";
             this.test.Size = new System.Drawing.Size(76, 26);
             this.test.TabIndex = 9;
@@ -229,7 +239,7 @@ namespace DIP
             // 
             // Threshold
             // 
-            this.Threshold.Controls.Add(this.numericUpDown1);
+            this.Threshold.Controls.Add(this.ThresVal);
             this.Threshold.Controls.Add(this.btn_Threshold);
             this.Threshold.Location = new System.Drawing.Point(12, 256);
             this.Threshold.Name = "Threshold";
@@ -237,6 +247,24 @@ namespace DIP
             this.Threshold.TabIndex = 14;
             this.Threshold.TabStop = false;
             this.Threshold.Text = "User Defined Thresholding";
+            // 
+            // ThresVal
+            // 
+            this.ThresVal.Location = new System.Drawing.Point(12, 20);
+            this.ThresVal.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.ThresVal.Name = "ThresVal";
+            this.ThresVal.Size = new System.Drawing.Size(93, 22);
+            this.ThresVal.TabIndex = 1;
+            this.ThresVal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ThresVal.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
             // 
             // btn_Threshold
             // 
@@ -246,24 +274,7 @@ namespace DIP
             this.btn_Threshold.TabIndex = 0;
             this.btn_Threshold.Text = "Thresholding";
             this.btn_Threshold.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(12, 20);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(93, 22);
-            this.numericUpDown1.TabIndex = 1;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
+            this.btn_Threshold.Click += new System.EventHandler(this.btn_Threshold_Click);
             // 
             // groupBox3
             // 
@@ -274,11 +285,45 @@ namespace DIP
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Sobel Edge Detection";
             // 
+            // histon1
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.histon1.ChartAreas.Add(chartArea3);
+            this.histon1.Location = new System.Drawing.Point(591, 12);
+            this.histon1.Name = "histon1";
+            series3.ChartArea = "ChartArea1";
+            series3.IsVisibleInLegend = false;
+            series3.Name = "Series1";
+            this.histon1.Series.Add(series3);
+            this.histon1.Size = new System.Drawing.Size(338, 239);
+            this.histon1.TabIndex = 16;
+            this.histon1.Text = "Histongram of grey level";
+            title3.Name = "Histongram of grey level";
+            this.histon1.Titles.Add(title3);
+            // 
+            // histon2
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.histon2.ChartAreas.Add(chartArea4);
+            this.histon2.Location = new System.Drawing.Point(590, 274);
+            this.histon2.Name = "histon2";
+            series4.ChartArea = "ChartArea1";
+            series4.IsVisibleInLegend = false;
+            series4.Name = "Series1";
+            this.histon2.Series.Add(series4);
+            this.histon2.Size = new System.Drawing.Size(338, 239);
+            this.histon2.TabIndex = 17;
+            this.histon2.Text = "Histongram of grey level";
+            title4.Name = "Histongram of grey level";
+            this.histon2.Titles.Add(title4);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 539);
+            this.Controls.Add(this.histon2);
+            this.Controls.Add(this.histon1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.Threshold);
             this.Controls.Add(this.HistonEqual);
@@ -298,7 +343,9 @@ namespace DIP
             this.groupBox2.ResumeLayout(false);
             this.HistonEqual.ResumeLayout(false);
             this.Threshold.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ThresVal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.histon1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.histon2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -324,9 +371,11 @@ namespace DIP
         private System.Windows.Forms.GroupBox HistonEqual;
         private System.Windows.Forms.Button btn_HistonEqual;
         private System.Windows.Forms.GroupBox Threshold;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown ThresVal;
         private System.Windows.Forms.Button btn_Threshold;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart histon1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart histon2;
     }
 }
 

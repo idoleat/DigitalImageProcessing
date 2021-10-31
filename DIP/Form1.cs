@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace DIP
 {
@@ -16,6 +12,7 @@ namespace DIP
     {
         public Bitmap OpenedBitmap;
         public Bitmap ProcessedBitmap;
+        byte[] ProcessedHisotonData = new byte[256];
         public List<byte[]> history = new List<byte[]>();
 
         public enum Filter
@@ -49,7 +46,9 @@ namespace DIP
                 ProcessedImageBox.Image = ProcessedBitmap;
 
                 // Add the original image as first history
-                history.Add( GetBitmapDataBytes(ProcessedBitmap) );
+                history.Add(GetBitmapDataBytes(ProcessedBitmap));
+                InitHistons();
+                UpdateHiston2(history.First());
             }
         }
 
@@ -133,6 +132,7 @@ namespace DIP
                     break;
 
                 case Filter.Thres:
+                    ThresholdFilter(ref rgbValues);
                     break;
 
                 case Filter.HSobel:
@@ -154,6 +154,27 @@ namespace DIP
 
             history.Add(rgbValues);
             ShowHistoryLast();
+            UpdateHiston2(history.Last());
+        }
+
+        private void InitHistons() {
+            byte[] data = new byte[256];
+            foreach(byte px in history.First())
+            {
+                data[px] += 1;
+            }
+            histon1.DataBindTable(data);
+            histon2.DataBindTable(ProcessedHisotonData);
+        }
+
+        private void UpdateHiston2(byte[] HistonData)
+        {
+            ProcessedHisotonData.Initialize();
+            foreach (var px in HistonData)
+            {
+                ProcessedHisotonData[px] += 1;
+            }
+            histon2.Update();
         }
     }
 }
