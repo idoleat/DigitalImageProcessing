@@ -21,12 +21,12 @@ namespace DIP
             for (int counter = 0; counter < original.Length; counter += 1)
                 original[counter] = rgbValue[counter];
 
-            List<byte> NxN = new List<byte>();
             for (int i = 1; i <= OpenedBitmap.Height - 2; i++)
             {
                 for (int j = 3; j < width - 3; j += 3)
                 {
-                    byte[] colors = new byte[256];
+                    /*byte[] colors = new byte[256];
+                    for (int k = 0; k < colors.Length; k++) colors[k] = 0;
 
                     colors[original[(i - 1) * width + j - 3]] = original[(i - 1) * width + j - 3];
                     colors[original[(i - 1) * width + j]] = original[(i - 1) * width + j - 3];
@@ -42,13 +42,29 @@ namespace DIP
                     for(int k=0; k<255; k++)
                     {
                         if (colors[k] != 0) count += 1;
-                        if(count == 4)
+                        if(count == 5)
                         {
-                            rgbValue[i * width + j] = colors[k];
-                            rgbValue[i * width + j + 1] = colors[k];
-                            rgbValue[i * width + j + 2] = colors[k];
+                            rgbValue[i * width + j] = (byte)k;
+                            rgbValue[i * width + j + 1] = (byte)k;
+                            rgbValue[i * width + j + 2] = (byte)k;
                         }
-                    }
+                    }*/
+                    List<byte> NxN = new List<byte>();
+                    NxN.Add(original[(i - 1) * width + j - 3]);
+                    NxN.Add(original[(i - 1) * width + j]);
+                    NxN.Add(original[(i - 1) * width + j + 3]);
+                    NxN.Add(original[i * width + j - 3]);
+                    NxN.Add(original[i * width + j]);
+                    NxN.Add(original[i * width + j + 3]);
+                    NxN.Add(original[(i + 1) * width + j - 3]);
+                    NxN.Add(original[(i + 1) * width + j]);
+                    NxN.Add(original[(i + 1) * width + j + 3]);
+                    NxN.Sort();
+
+                    byte median = NxN.ElementAt(4);
+                    rgbValue[i * width + j] = median;
+                    rgbValue[i * width + j + 1] = median;
+                    rgbValue[i * width + j + 2] = median;
                 }
             }
         }
