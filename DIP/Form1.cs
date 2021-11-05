@@ -50,6 +50,7 @@ namespace DIP
                 history.Add(GetBitmapDataBytes(ProcessedBitmap));
                 InitHistons();
                 UpdateHiston2(history.First());
+                btn_OpenImage.Enabled = false;
             }
         }
 

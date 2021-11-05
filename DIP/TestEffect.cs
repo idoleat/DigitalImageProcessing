@@ -53,6 +53,7 @@ namespace DIP
             }
 
             history.Add(rgbValues);
+            UpdateHiston2(history.Last());
             ShowHistoryLast();
         }
     }
