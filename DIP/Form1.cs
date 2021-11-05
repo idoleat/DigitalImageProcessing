@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace DIP
 {
@@ -12,7 +13,7 @@ namespace DIP
     {
         public Bitmap OpenedBitmap;
         public Bitmap ProcessedBitmap;
-        byte[] ProcessedHisotonData = new byte[256];
+        List<byte> ProcessedHisotonData = new List<byte>();
         public List<byte[]> history = new List<byte[]>();
 
         public enum Filter
@@ -76,6 +77,7 @@ namespace DIP
         {
             if (history.Count <= 1) return;
             history.RemoveAt(history.Count - 1);
+            UpdateHiston2(history.Last());
             ShowHistoryLast();
         }
 
@@ -164,16 +166,35 @@ namespace DIP
                 data[px] += 1;
             }
             histon1.DataBindTable(data);
+            for (int i = 0; i < 256; i++)
+            {
+                ProcessedHisotonData.Add(128);
+            }
             histon2.DataBindTable(ProcessedHisotonData);
         }
 
         private void UpdateHiston2(byte[] HistonData)
         {
-            ProcessedHisotonData.Initialize();
+            //ProcessedHisotonData.
+            byte[] newData = new byte[256];
             foreach (var px in HistonData)
             {
-                ProcessedHisotonData[px] += 1;
+                newData[px] += 1;
             }
+            ProcessedHisotonData.Clear();
+            ProcessedHisotonData.Concat(newData);
+            Console.WriteLine(ProcessedHisotonData.Count);
+            //ProcessedHisotonData.RemoveRange(0, ProcessedHisotonData.Count/2);
+            //histon2.Series.First().Points = new List<byte>(newData);
+            int count = 0;
+            foreach(var val in histon2.Series.Last().Points)
+            {
+                double[] v = new double[1];
+                v[0] = newData[count];
+                val.YValues = v;
+                count += 1;
+            }
+            histon2.DataBind();
             histon2.Update();
         }
     }
