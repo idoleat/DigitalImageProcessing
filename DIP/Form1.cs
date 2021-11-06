@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace DIP
 {
@@ -13,7 +12,6 @@ namespace DIP
     {
         public Bitmap OpenedBitmap;
         public Bitmap ProcessedBitmap;
-        List<byte> ProcessedHisotonData = new List<byte>();
         public List<byte[]> history = new List<byte[]>();
 
         public enum Filter
@@ -49,7 +47,6 @@ namespace DIP
                 // Add the original image as first history
                 history.Add(GetBitmapDataBytes(ProcessedBitmap));
                 InitHistons();
-                UpdateHiston2(history.First());
                 btn_OpenImage.Enabled = false;
             }
         }
@@ -167,26 +164,18 @@ namespace DIP
                 data[px] += 1;
             }
             histon1.DataBindTable(data);
-            for (int i = 0; i < 256; i++)
-            {
-                ProcessedHisotonData.Add(128);
-            }
-            histon2.DataBindTable(ProcessedHisotonData);
+            histon2.DataBindTable(new byte[256]);
+            UpdateHiston2(history.First());
         }
 
         private void UpdateHiston2(byte[] HistonData)
         {
-            //ProcessedHisotonData.
             byte[] newData = new byte[256];
             foreach (var px in HistonData)
             {
                 newData[px] += 1;
             }
-            ProcessedHisotonData.Clear();
-            ProcessedHisotonData.Concat(newData);
-            Console.WriteLine(ProcessedHisotonData.Count);
-            //ProcessedHisotonData.RemoveRange(0, ProcessedHisotonData.Count/2);
-            //histon2.Series.First().Points = new List<byte>(newData);
+
             int count = 0;
             foreach(var val in histon2.Series.Last().Points)
             {
@@ -195,8 +184,6 @@ namespace DIP
                 val.YValues = v;
                 count += 1;
             }
-            histon2.DataBind();
-            histon2.Update();
         }
     }
 }
