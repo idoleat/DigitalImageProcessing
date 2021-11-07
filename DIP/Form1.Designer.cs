@@ -65,6 +65,9 @@ namespace DIP
             this.histon2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btn_ConnComp = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btn_OpenBImage = new System.Windows.Forms.Button();
+            this.register = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SourceImageBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProcessedImageBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -76,6 +79,7 @@ namespace DIP
             ((System.ComponentModel.ISupportInitialize)(this.histon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.histon2)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_OpenImage
@@ -389,11 +393,41 @@ namespace DIP
             this.btn_ConnComp.UseVisualStyleBackColor = true;
             this.btn_ConnComp.Click += new System.EventHandler(this.btn_ConnComp_Click);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.register);
+            this.groupBox5.Controls.Add(this.btn_OpenBImage);
+            this.groupBox5.Location = new System.Drawing.Point(13, 469);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(214, 58);
+            this.groupBox5.TabIndex = 19;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Image Registration";
+            // 
+            // btn_OpenBImage
+            // 
+            this.btn_OpenBImage.Location = new System.Drawing.Point(9, 18);
+            this.btn_OpenBImage.Name = "btn_OpenBImage";
+            this.btn_OpenBImage.Size = new System.Drawing.Size(94, 27);
+            this.btn_OpenBImage.TabIndex = 0;
+            this.btn_OpenBImage.Text = "Open B Image";
+            this.btn_OpenBImage.UseVisualStyleBackColor = true;
+            // 
+            // register
+            // 
+            this.register.Location = new System.Drawing.Point(109, 18);
+            this.register.Name = "register";
+            this.register.Size = new System.Drawing.Size(95, 27);
+            this.register.TabIndex = 1;
+            this.register.Text = "Register";
+            this.register.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 539);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.histon2);
             this.Controls.Add(this.histon1);
@@ -421,6 +455,7 @@ namespace DIP
             ((System.ComponentModel.ISupportInitialize)(this.histon1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.histon2)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -457,6 +492,9 @@ namespace DIP
         private System.Windows.Forms.Button btn_SobelOverlay;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btn_ConnComp;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button register;
+        private System.Windows.Forms.Button btn_OpenBImage;
     }
 }
 
