@@ -59,7 +59,7 @@ namespace DIP
 
             if(saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                OpenedBitmap.Save(saveFileDialog.FileName);
+                ProcessedBitmap.Save(saveFileDialog.FileName);
             }
         }
 

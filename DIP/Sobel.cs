@@ -124,6 +124,10 @@ namespace DIP
                         original[(i + 1) * width + j] * 0 +
                         original[(i + 1) * width + j + 3];
 
+                    if (x < 0) x = -x;
+                    if (x > 255) x = 255;
+                    if (y < 0) y = -y;
+                    if (y > 255) y = 255;
                     double result = Math.Sqrt(x * x + y * y);
 
                     rgbValue[i * width + j] = (byte)result;
