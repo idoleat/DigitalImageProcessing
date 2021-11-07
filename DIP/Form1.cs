@@ -157,6 +157,7 @@ namespace DIP
                     break;
 
                 case Filter.ConnComp:
+                    ConnComp(ref rgbValues);
                     break;
 
                 default:

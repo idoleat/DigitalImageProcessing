@@ -29,12 +29,12 @@ namespace DIP
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btn_OpenImage = new System.Windows.Forms.Button();
             this.btn_SaveImage = new System.Windows.Forms.Button();
             this.SourceImageBox = new System.Windows.Forms.PictureBox();
@@ -63,6 +63,8 @@ namespace DIP
             this.HSobel = new System.Windows.Forms.Button();
             this.histon1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.histon2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btn_ConnComp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SourceImageBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProcessedImageBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -73,6 +75,7 @@ namespace DIP
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.histon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.histon2)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_OpenImage
@@ -160,9 +163,9 @@ namespace DIP
             // 
             // test
             // 
-            this.test.Location = new System.Drawing.Point(10, 501);
+            this.test.Location = new System.Drawing.Point(905, 519);
             this.test.Name = "test";
-            this.test.Size = new System.Drawing.Size(76, 26);
+            this.test.Size = new System.Drawing.Size(34, 19);
             this.test.TabIndex = 9;
             this.test.Text = "test";
             this.test.UseVisualStyleBackColor = true;
@@ -298,7 +301,7 @@ namespace DIP
             // 
             this.btn_SobelOverlay.Location = new System.Drawing.Point(6, 51);
             this.btn_SobelOverlay.Name = "btn_SobelOverlay";
-            this.btn_SobelOverlay.Size = new System.Drawing.Size(202, 21);
+            this.btn_SobelOverlay.Size = new System.Drawing.Size(204, 21);
             this.btn_SobelOverlay.TabIndex = 3;
             this.btn_SobelOverlay.Text = "Overlay";
             this.btn_SobelOverlay.UseVisualStyleBackColor = true;
@@ -336,41 +339,62 @@ namespace DIP
             // 
             // histon1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.histon1.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.histon1.ChartAreas.Add(chartArea1);
             this.histon1.Location = new System.Drawing.Point(591, 12);
             this.histon1.Name = "histon1";
-            series3.ChartArea = "ChartArea1";
-            series3.IsVisibleInLegend = false;
-            series3.Name = "Series1";
-            this.histon1.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.IsVisibleInLegend = false;
+            series1.Name = "Series1";
+            this.histon1.Series.Add(series1);
             this.histon1.Size = new System.Drawing.Size(338, 239);
             this.histon1.TabIndex = 16;
             this.histon1.Text = "Histongram of grey level";
-            title3.Name = "Histongram of grey level";
-            this.histon1.Titles.Add(title3);
+            title1.Name = "Histongram of grey level";
+            this.histon1.Titles.Add(title1);
             // 
             // histon2
             // 
-            chartArea4.Name = "ChartArea1";
-            this.histon2.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.histon2.ChartAreas.Add(chartArea2);
             this.histon2.Location = new System.Drawing.Point(590, 274);
             this.histon2.Name = "histon2";
-            series4.ChartArea = "ChartArea1";
-            series4.IsVisibleInLegend = false;
-            series4.Name = "Series1";
-            this.histon2.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.IsVisibleInLegend = false;
+            series2.Name = "Series1";
+            this.histon2.Series.Add(series2);
             this.histon2.Size = new System.Drawing.Size(338, 239);
             this.histon2.TabIndex = 17;
             this.histon2.Text = "Histongram of grey level";
-            title4.Name = "Histongram of grey level";
-            this.histon2.Titles.Add(title4);
+            title2.Name = "Histongram of grey level";
+            this.histon2.Titles.Add(title2);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btn_ConnComp);
+            this.groupBox4.Location = new System.Drawing.Point(13, 404);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(213, 52);
+            this.groupBox4.TabIndex = 18;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Connected Component";
+            // 
+            // btn_ConnComp
+            // 
+            this.btn_ConnComp.Location = new System.Drawing.Point(7, 18);
+            this.btn_ConnComp.Name = "btn_ConnComp";
+            this.btn_ConnComp.Size = new System.Drawing.Size(201, 26);
+            this.btn_ConnComp.TabIndex = 0;
+            this.btn_ConnComp.Text = "Connect";
+            this.btn_ConnComp.UseVisualStyleBackColor = true;
+            this.btn_ConnComp.Click += new System.EventHandler(this.btn_ConnComp_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(940, 539);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.histon2);
             this.Controls.Add(this.histon1);
             this.Controls.Add(this.groupBox3);
@@ -396,6 +420,7 @@ namespace DIP
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.histon1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.histon2)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -430,6 +455,8 @@ namespace DIP
         private System.Windows.Forms.Button HSobel;
         private System.Windows.Forms.Button SobelComb;
         private System.Windows.Forms.Button btn_SobelOverlay;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btn_ConnComp;
     }
 }
 

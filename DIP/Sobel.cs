@@ -69,7 +69,7 @@ namespace DIP
                 for (int j = 3; j < width - 3; j += 3)
                 {
                     int y =
-                        original[(i - 1) * width + j - 3] *(-1) +
+                        original[(i - 1) * width + j - 3] * (-1) +
                         original[(i - 1) * width + j] * 0 +
                         original[(i - 1) * width + j + 3] +
                         original[i * width + j - 3] * 2 +
