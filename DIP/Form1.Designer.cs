@@ -29,12 +29,12 @@ namespace DIP
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btn_OpenImage = new System.Windows.Forms.Button();
             this.btn_SaveImage = new System.Windows.Forms.Button();
             this.SourceImageBox = new System.Windows.Forms.PictureBox();
@@ -57,8 +57,12 @@ namespace DIP
             this.ThresVal = new System.Windows.Forms.NumericUpDown();
             this.btn_Threshold = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.SobelComb = new System.Windows.Forms.Button();
+            this.VSobel = new System.Windows.Forms.Button();
+            this.HSobel = new System.Windows.Forms.Button();
             this.histon1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.histon2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.SobelOverlay = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SourceImageBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProcessedImageBox)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -66,6 +70,7 @@ namespace DIP
             this.HistonEqual.SuspendLayout();
             this.Threshold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ThresVal)).BeginInit();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.histon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.histon2)).BeginInit();
             this.SuspendLayout();
@@ -229,9 +234,9 @@ namespace DIP
             // 
             // btn_HistonEqual
             // 
-            this.btn_HistonEqual.Location = new System.Drawing.Point(10, 19);
+            this.btn_HistonEqual.Location = new System.Drawing.Point(6, 19);
             this.btn_HistonEqual.Name = "btn_HistonEqual";
-            this.btn_HistonEqual.Size = new System.Drawing.Size(199, 29);
+            this.btn_HistonEqual.Size = new System.Drawing.Size(203, 29);
             this.btn_HistonEqual.TabIndex = 0;
             this.btn_HistonEqual.Text = "Histongram Equalization";
             this.btn_HistonEqual.UseVisualStyleBackColor = true;
@@ -270,7 +275,7 @@ namespace DIP
             // 
             this.btn_Threshold.Location = new System.Drawing.Point(110, 18);
             this.btn_Threshold.Name = "btn_Threshold";
-            this.btn_Threshold.Size = new System.Drawing.Size(98, 27);
+            this.btn_Threshold.Size = new System.Drawing.Size(99, 27);
             this.btn_Threshold.TabIndex = 0;
             this.btn_Threshold.Text = "Thresholding";
             this.btn_Threshold.UseVisualStyleBackColor = true;
@@ -278,44 +283,88 @@ namespace DIP
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.SobelOverlay);
+            this.groupBox3.Controls.Add(this.SobelComb);
+            this.groupBox3.Controls.Add(this.VSobel);
+            this.groupBox3.Controls.Add(this.HSobel);
             this.groupBox3.Location = new System.Drawing.Point(12, 316);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(215, 51);
+            this.groupBox3.Size = new System.Drawing.Size(215, 82);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Sobel Edge Detection";
             // 
+            // SobelComb
+            // 
+            this.SobelComb.Location = new System.Drawing.Point(146, 21);
+            this.SobelComb.Name = "SobelComb";
+            this.SobelComb.Size = new System.Drawing.Size(63, 24);
+            this.SobelComb.TabIndex = 2;
+            this.SobelComb.Text = "Combine";
+            this.SobelComb.UseVisualStyleBackColor = true;
+            this.SobelComb.Click += new System.EventHandler(this.SobelComb_Click);
+            // 
+            // VSobel
+            // 
+            this.VSobel.Location = new System.Drawing.Point(80, 21);
+            this.VSobel.Name = "VSobel";
+            this.VSobel.Size = new System.Drawing.Size(60, 24);
+            this.VSobel.TabIndex = 1;
+            this.VSobel.Text = "V Sobel";
+            this.VSobel.UseVisualStyleBackColor = true;
+            this.VSobel.Click += new System.EventHandler(this.VSobel_Click);
+            // 
+            // HSobel
+            // 
+            this.HSobel.Location = new System.Drawing.Point(6, 21);
+            this.HSobel.Name = "HSobel";
+            this.HSobel.Size = new System.Drawing.Size(68, 24);
+            this.HSobel.TabIndex = 0;
+            this.HSobel.Text = "H Sobel";
+            this.HSobel.UseVisualStyleBackColor = true;
+            this.HSobel.Click += new System.EventHandler(this.HSobel_Click);
+            // 
             // histon1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.histon1.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.histon1.ChartAreas.Add(chartArea1);
             this.histon1.Location = new System.Drawing.Point(591, 12);
             this.histon1.Name = "histon1";
-            series3.ChartArea = "ChartArea1";
-            series3.IsVisibleInLegend = false;
-            series3.Name = "Series1";
-            this.histon1.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.IsVisibleInLegend = false;
+            series1.Name = "Series1";
+            this.histon1.Series.Add(series1);
             this.histon1.Size = new System.Drawing.Size(338, 239);
             this.histon1.TabIndex = 16;
             this.histon1.Text = "Histongram of grey level";
-            title3.Name = "Histongram of grey level";
-            this.histon1.Titles.Add(title3);
+            title1.Name = "Histongram of grey level";
+            this.histon1.Titles.Add(title1);
             // 
             // histon2
             // 
-            chartArea4.Name = "ChartArea1";
-            this.histon2.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.histon2.ChartAreas.Add(chartArea2);
             this.histon2.Location = new System.Drawing.Point(590, 274);
             this.histon2.Name = "histon2";
-            series4.ChartArea = "ChartArea1";
-            series4.IsVisibleInLegend = false;
-            series4.Name = "Series1";
-            this.histon2.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.IsVisibleInLegend = false;
+            series2.Name = "Series1";
+            this.histon2.Series.Add(series2);
             this.histon2.Size = new System.Drawing.Size(338, 239);
             this.histon2.TabIndex = 17;
             this.histon2.Text = "Histongram of grey level";
-            title4.Name = "Histongram of grey level";
-            this.histon2.Titles.Add(title4);
+            title2.Name = "Histongram of grey level";
+            this.histon2.Titles.Add(title2);
+            // 
+            // SobelOverlay
+            // 
+            this.SobelOverlay.Location = new System.Drawing.Point(6, 51);
+            this.SobelOverlay.Name = "SobelOverlay";
+            this.SobelOverlay.Size = new System.Drawing.Size(202, 21);
+            this.SobelOverlay.TabIndex = 3;
+            this.SobelOverlay.Text = "Overlay";
+            this.SobelOverlay.UseVisualStyleBackColor = true;
+            this.SobelOverlay.Click += new System.EventHandler(this.SobelOverlay_Click);
             // 
             // Form1
             // 
@@ -344,6 +393,7 @@ namespace DIP
             this.HistonEqual.ResumeLayout(false);
             this.Threshold.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ThresVal)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.histon1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.histon2)).EndInit();
             this.ResumeLayout(false);
@@ -376,6 +426,10 @@ namespace DIP
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataVisualization.Charting.Chart histon1;
         private System.Windows.Forms.DataVisualization.Charting.Chart histon2;
+        private System.Windows.Forms.Button VSobel;
+        private System.Windows.Forms.Button HSobel;
+        private System.Windows.Forms.Button SobelComb;
+        private System.Windows.Forms.Button SobelOverlay;
     }
 }
 

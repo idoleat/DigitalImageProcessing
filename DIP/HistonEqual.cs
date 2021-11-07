@@ -15,6 +15,8 @@ namespace DIP
 
         private void HistongramEqualization(ref byte[] rgbValue)
         {
+            float[] hist = new float[256];
+            //hist[0] = 
             for (int i = 0; i < rgbValue.Length; i += 3)
             {
 
