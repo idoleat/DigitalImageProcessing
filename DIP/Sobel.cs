@@ -51,6 +51,9 @@ namespace DIP
                         original[(i + 1) * width + j] * 2 +
                         original[(i + 1) * width + j + 3] * 1;
 
+                    if (x < 0) x = -x;
+                    if (x > 255) x = 255;
+
                     rgbValue[i * width + j] = (byte)x;
                     rgbValue[i * width + j + 1] = (byte)x;
                     rgbValue[i * width + j + 2] = (byte)x;
@@ -78,6 +81,9 @@ namespace DIP
                         original[(i + 1) * width + j - 3] * (-1) +
                         original[(i + 1) * width + j] * 0 +
                         original[(i + 1) * width + j + 3];
+
+                    if (y < 0) y = -y;
+                    if (y > 255) y = 255;
 
                     rgbValue[i * width + j] = (byte)y;
                     rgbValue[i * width + j + 1] = (byte)y;
