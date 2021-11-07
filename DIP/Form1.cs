@@ -23,6 +23,7 @@ namespace DIP
             HSobel,
             VSobel,
             CombSobel,
+            SobelOverlay,
             ConnComp,
             Regist
         }
@@ -148,6 +149,10 @@ namespace DIP
                     Comb_Sobel(ref rgbValues);
                     break;
 
+                case Filter.SobelOverlay:
+                    SobelOverlay(ref rgbValues);
+                    break;
+
                 case Filter.Regist:
                     break;
 
@@ -191,11 +196,6 @@ namespace DIP
                 val.YValues = v;
                 count += 1;
             }
-        }
-
-        private void SobelOverlay_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

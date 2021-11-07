@@ -127,9 +127,24 @@ namespace DIP
             }
         }
 
-        private void SobelOverla()
+        private void SobelOverlay(ref byte[] rgbValue)
         {
+            GeneralFilter(Filter.CombSobel);
+            GeneralFilter(Filter.Thres);
 
+            byte[] original = new byte[rgbValue.Length];
+            for (int counter = 0; counter < original.Length; counter += 1)
+                original[counter] = history.Last()[counter];
+            history.RemoveAt(history.Count - 1);
+            history.RemoveAt(history.Count - 1);
+
+            for (int i=1; i<original.Length; i += 3)
+            {
+                if(original[i] == 255)
+                {
+                    rgbValue[i] = 255;
+                }
+            }
         }
     }
 }
