@@ -27,30 +27,31 @@ namespace DIP
             if (count % 3 == 0)
             {
                 for (int counter = 0; counter < rgbValues.Length; counter += 3)
+                {
                     rgbValues[counter] = 255;
-                for (int counter = 1; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
-                for (int counter = 2; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
+                    rgbValues[counter + 1] = 0;
+                    rgbValues[counter + 2] = 0;
+                }
             }
             else if (count % 3 == 1)
             {
                 for (int counter = 0; counter < rgbValues.Length; counter += 3)
+                {
                     rgbValues[counter] = 0;
-                for (int counter = 1; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 255;
-                for (int counter = 2; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
+                    rgbValues[counter + 1] = 255;
+                    rgbValues[counter + 2] = 0;
+                }
             }
             else
             {
                 for (int counter = 0; counter < rgbValues.Length; counter += 3)
+                {
                     rgbValues[counter] = 0;
-                for (int counter = 1; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 0;
-                for (int counter = 2; counter < rgbValues.Length; counter += 3)
-                    rgbValues[counter] = 255;
+                    rgbValues[counter + 1] = 0;
+                    rgbValues[counter + 2] = 255;
+                }
             }
+            Console.WriteLine(ProcessedBitmap.PixelFormat);
 
             history.Add(rgbValues);
             UpdateHiston2(history.Last());
